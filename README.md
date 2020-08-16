@@ -14,4 +14,3 @@
 ![check-standard/master](https://github.com/sunn-e/bddummy/workflows/check-standard/badge.svg?branch=master)
 
 ![check-standard/dev](https://github.com/sunn-e/bddummy/workflows/check-standard/badge.svg?branch=dev)
-
