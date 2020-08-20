@@ -63,19 +63,20 @@ jobs:
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
       - name: Install dependencies
         run: |
-          # Your "dev" dependencies go here
           remotes::install_github('bd-R/bdverse@dev')
           remotes::install_github('bd-R/bdDwC@dev', dependencies = FALSE, upgrade = 'never')
           remotes::install_github('bd-R/bddwc.app@dev', dependencies = FALSE, upgrade = 'never')
           remotes::install_github('bd-R/bdchecks@dev', dependencies = FALSE, upgrade = 'never')
           remotes::install_github('bd-R/bdclean@dev', dependencies = FALSE, upgrade = 'never')
           remotes::install_github('bd-R/bdutilities@dev', dependencies = FALSE, upgrade = 'never')
+          
           remotes::install_github('sunn-e/bddummy@dev')
-          remotes::install_github('bd-R/bdtests@dev')
+          remotes::install_github('bd-R/bdtests@dev', dependencies = FALSE, upgrade = 'never')
           # End "dev" here
-          # Mas part
+          # Mas dependencies part
           remotes::install_deps(dependencies = TRUE)
-          # Mas part
+          # Dev bddummy part
+                  
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("testthat")
         shell: Rscript {0}
