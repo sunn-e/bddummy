@@ -1,3 +1,5 @@
+# This is a tidyverse CI workflow
+# 
 on:
   workflow_dispatch:
   push:
@@ -10,10 +12,10 @@ on:
   # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
   schedule:
     # * is a special character in YAML so you have to quote this string
-    # Here it will run after every 8 hours starting from 0th hour of the day
-    - cron: "0 0/8 * * *"
+    # Here it will run after every day starting from 0th hour of the day
+    #- cron: "0 0 * * *"
 
-name: Multi-CI-tidyverse-Mas-Mas
+name: MultiCI-Dev-Dev
 
 jobs:
   R-CMD-check:
