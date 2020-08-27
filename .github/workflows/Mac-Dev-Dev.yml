@@ -65,6 +65,23 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
+          # 
+          pkg_name <- basename(getwd())  # getting package name
+          if (!require("pacman")) install.packages("pacman")
+            deps <- pacman::p_depends(pkg_name, local = TRUE, character.only = TRUE)
+          # 
+          core_pkgs <-
+            c(
+                "bdverse",
+                "bdDwC",
+                "bdchecks",
+                "bddwc.app",
+                "bdchecks.app",
+                "bdclean",
+                "bdutilities",
+                "bdutilities.app"
+                )
+          #
           # Your "dev" dependencies go here
           remotes::install_github('bd-R/bdDwC', ref = 'dev', depenedencies = FALSE)
           remotes::install_github('bd-R/bddwc.app', ref = 'dev', depenedencies = FALSE)
