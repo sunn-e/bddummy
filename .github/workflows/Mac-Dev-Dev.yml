@@ -68,10 +68,6 @@ jobs:
           
           # -----------| Start [Dev]-[Dev] (i.e., [Package]-[Dependencies]) |-------------
           pkg_name <- basename(getwd())                      # Get package name
-          remotes::install_github(paste0('bd-R/', pkg_name), # Install its dev branch
-                                  ref = 'dev',
-                                  depenedencies = 'Imports', # @dev might have new deps 
-                                  upgrade = 'always')        # Or new version requirements
           if (!require('pacman')) install.packages('pacman')
           pkg_deps <- 
             pacman::p_depends(pkg_name, local = TRUE,
@@ -86,9 +82,14 @@ jobs:
           lapply(pkgs_to_install,              # Install them
                  remotes::install_github(paste0('bd-R/', pkgs_to_install), 
                                          ref = 'dev',
-                                         depenedencies = 'Imports',
-                                         upgrade = 'always'))
+                                         depenedencies = 'Imports',# @dev might have new deps
+                                         upgrade = 'always'))      # Or new version requirements
           # ---------------------- | End [Dev]-[Dev] | ------------------------------<<<<|
+
+          remotes::install_github('bd-R/bdtests', # Install bdutilities dev branch
+                                  ref = 'dev',
+                                  depenedencies = 'Imports',
+                                  upgrade = 'always')
             
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("testthat")
