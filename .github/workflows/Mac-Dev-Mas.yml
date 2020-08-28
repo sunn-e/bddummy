@@ -64,15 +64,6 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
-          
-          # -----------| Start [Mas]-[Dev] (i.e., [Package]-[Dependencies]) |-------------
-          pkg_name <- basename(getwd())                      # Get package name
-          remotes::install_github(paste0('bd-R/', pkg_name), # Install its dev branch
-                                  ref = 'dev',
-                                  depenedencies = 'Imports', # @dev might have new deps
-                                  upgrade = 'always')        # Or new version requirements
-          # ---------------------- | End [Mas]-[Dev] | ------------------------------<<<<|
-          
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("testthat")
         shell: Rscript {0}
