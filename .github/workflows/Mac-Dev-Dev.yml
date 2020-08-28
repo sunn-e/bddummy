@@ -79,11 +79,13 @@ jobs:
           core_pkgs <- bdutilities::bdverse_core_pkgs # Get all of `bdverse` core packages
           pkgs_to_install <- 
             core_pkgs[core_pkgs %in% pkg_deps] # Identify which `bdverse` pkgs to install
-          lapply(pkgs_to_install,              # Install them
+          if (length(pkgs_to_install) > 0) {   # If any, install them
+            lapply(pkgs_to_install,
                  remotes::install_github(paste0('bd-R/', pkgs_to_install), 
-                                         ref = 'dev',
-                                         depenedencies = 'Imports',# @dev might have new deps
-                                         upgrade = 'always'))      # Or new version requirements
+                                  ref = 'dev',
+                                  depenedencies = 'Imports',# @dev might have new deps
+                                  upgrade = 'always'))      # Or new version requirements
+            }
           # ---------------------- | End [Dev]-[Dev] | ------------------------------<<<<|
 
           remotes::install_github('bd-R/bdtests', # Install bdutilities dev branch
